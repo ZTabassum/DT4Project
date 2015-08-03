@@ -14,6 +14,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 #
+from google.appengine.ext import ndb
 import webapp2
 import jinja2
 import os
@@ -22,6 +23,21 @@ jinja_environment= jinja2.Environment(
   loader=jinja2.FileSystemLoader(os.path.dirname(__file__)),
   extensions=['jinja2.ext.autoescape'],
   autoescape=True)
+
+class User(ndb.Model):
+    email = ndb.StringProperty(required= True)
+    name= ndb.StringProperty(required= True)
+    level= ndb.IntegerProperty(required = True)
+    password= ndb.StringProperty(required =True)
+    points = ndb.IntegerProperty()
+
+class Question(ndb.Model):
+    act_question= ndb.StringProperty(required=True)
+    category= ndb.StringProperty(required= True)
+    level = ndb.IntegerProperty(required = True)
+    type_question= ndb.StringProperty()
+    point_level = ndb.IntegerProperty()
+    answer= ndb.StringProperty()
 
 
 class MainHandler(webapp2.RequestHandler):
