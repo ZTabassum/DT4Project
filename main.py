@@ -42,6 +42,7 @@ class Question(ndb.Model):
     answer= ndb.StringProperty()
 
 question1=Question(act_question= "How many moons does earth have?", category="Science", level= 1, answer="1")
+question2=Question(act_question= "Who is the first president of the United States?", category="Social Studies", level= 1, answer="George Washington")
 
 
 class MainHandler(webapp2.RequestHandler):
@@ -63,9 +64,9 @@ class FrontPage(webapp2.RequestHandler):
 
 class GameHandler(webapp2.RequestHandler):
     def get(self):
-        self.response.write(user1.name + " level" + str(user1.level))
         template = jinja_environment.get_template('templates/game.html')
         self.response.out.write(template.render())
+
 
 
 class AddQHandler(webapp2.RequestHandler):
@@ -79,6 +80,27 @@ class  InstructionsHandler(webapp2.RequestHandler):
         template = jinja_environment.get_template('templates/instructions.html')
         self.response.out.write(template.render())
 
+class ScienceHandler(webapp2.RequestHandler):
+    def get(self):
+        template = jinja_environment.get_template('templates/science.html')
+        self.response.out.write(template.render())
+        self.response.write(user1.name + " level" + str(user1.level))
+
+class SocialStudiesHandler(webapp2.RequestHandler):
+    def get(self):
+        template = jinja_environment.get_template('templates/ss.html')
+        self.response.out.write(template.render())
+        self.response.write(user1.name + " level" + str(user1.level))
+
+class MathHandler(webapp2.RequestHandler):
+    def get(self):
+        template = jinja_environment.get_template('templates/math.html')
+        self.response.out.write(template.render())
+        self.response.write(user1.name + " level" + str(user1.level))
+
+
+
+
 
 
 
@@ -89,5 +111,8 @@ app = webapp2.WSGIApplication([
     ('/frontPage', FrontPage),
     ('/startGame', GameHandler),
     ('/addQ', AddQHandler),
-    ('/instructions', InstructionsHandler)
+    ('/instructions', InstructionsHandler),
+    ('/science', ScienceHandler),
+    ('/ss', SocialStudiesHandler),
+    ('/math', MathHandler)
 ], debug=True)
