@@ -31,6 +31,8 @@ class User(ndb.Model):
     password= ndb.StringProperty(required =True)
     points = ndb.IntegerProperty()
 
+user1= User(email="dt4@gmail.com", name="DT4", level=7, password="dt4cssi", points=342)
+user1.put()
 class Question(ndb.Model):
     act_question= ndb.StringProperty(required=True)
     category= ndb.StringProperty(required= True)
@@ -38,6 +40,8 @@ class Question(ndb.Model):
     type_question= ndb.StringProperty()
     point_level = ndb.IntegerProperty()
     answer= ndb.StringProperty()
+
+question1=Question(act_question= "How many moons does earth have?", category="Science", level= 1, answer="1")
 
 
 class MainHandler(webapp2.RequestHandler):
@@ -51,7 +55,7 @@ class MainHandler(webapp2.RequestHandler):
 
 class GameHandler(webapp2.RequestHandler):
     def get(self):
-        self.response.write('Hello world!')
+        self.response.write(user1.name + " level" + str(user1.level))
 
 
 
