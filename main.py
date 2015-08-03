@@ -46,20 +46,48 @@ question1=Question(act_question= "How many moons does earth have?", category="Sc
 
 class MainHandler(webapp2.RequestHandler):
     def get(self):
-        self.response.write('Hello world!')
         template = jinja_environment.get_template('templates/mainpage.html')
         self.response.out.write(template.render())
     def post(self):
-        game_template = jinja_environment.game_template('templates/game.html')
+        frontpage_template = jinja_environment.frontpage_template('templates/frontpage.html')
+
+class FrontPage(webapp2.RequestHandler):
+    def get(self):
+        template = jinja_environment.get_template('templates/frontpage.html')
+        self.response.out.write(template.render())
+    def post(self):
+        game_template = jinja_environment.game_template('templates/startGame.html')
+
+
 
 
 class GameHandler(webapp2.RequestHandler):
     def get(self):
         self.response.write(user1.name + " level" + str(user1.level))
+        template = jinja_environment.get_template('templates/game.html')
+        self.response.out.write(template.render())
+
+
+class AddQHandler(webapp2.RequestHandler):
+    def get(self):
+        self.response.write('Hello World')
+        template = jinja_environment.get_template('templates/addq.html')
+        self.response.out.write(template.render())
+class  InstructionsHandler(webapp2.RequestHandler):
+    def get(self):
+        self.response.write('Hello World')
+        template = jinja_environment.get_template('templates/instructions.html')
+        self.response.out.write(template.render())
+
+
+
 
 
 
 app = webapp2.WSGIApplication([
     ('/', MainHandler),
-    ('/startGame', GameHandler)
+    ('/frontPage', FrontPage),
+    ('/startGame', GameHandler),
+    ('/addQ', AddQHandler),
+    ('/instructions', InstructionsHandler)
 ], debug=True)
