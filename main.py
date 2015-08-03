@@ -42,11 +42,11 @@ class Question(ndb.Model):
     answer= ndb.StringProperty()
 
 question1=Question(act_question= "How many moons does earth have?", category="Science", level= 1, answer="1")
-question2=Question(act_question= "If the number of protons in an element is seven, how many electrons does it have", category="Science", level= 4, answer="seven")
+question2=Question(act_question= "If the number of protons in an element is seven, how many electrons does it have", category="Science", level= 3, answer="seven")
 question3=Question(act_question= "How many planets are there?", category="Science", level= 2, answer="Eight")
-question4=Question(act_question= "How many moons does Saturn have?", category="Science", level= 3, answer="Sixty Two")
-question5=Question(act_question= "What is the main element in Earth's atmosphere", category="Science", level= 1, answer="1")
-question5=
+question4=Question(act_question= "How many moons does Saturn have?", category="Science", level= 4, answer="Sixty Two")
+question5=Question(act_question= "What is the main element in Earth's atmosphere", category="Oxygen", level= 2, answer="1")
+
 
 
 class MainHandler(webapp2.RequestHandler):
