@@ -15,6 +15,8 @@
 # limitations under the License.
 #
 from google.appengine.ext import ndb
+from google.appengine.api import users
+import json
 import webapp2
 import jinja2
 import os
@@ -25,14 +27,15 @@ jinja_environment= jinja2.Environment(
   autoescape=True)
 
 class User(ndb.Model):
-    email = ndb.StringProperty(required= True)
-    name= ndb.StringProperty(required= True)
-    level= ndb.IntegerProperty(required = True)
-    password= ndb.StringProperty(required =True)
+    name= ndb.StringProperty()
+    level= ndb.IntegerProperty()
     points = ndb.IntegerProperty()
+    email_address = ndb.StringProperty()
+    key=ndb.StringProperty(required=True)
 
-user1= User(email="dt4@gmail.com", name="DT4", level=1, password="dt4cssi", points=342)
-user1.put()
+
+
+
 class Question(ndb.Model):
     act_question= ndb.StringProperty(required=True)
     category= ndb.StringProperty(required= True)
@@ -58,17 +61,21 @@ question5.put()
 
 
 
-class MainHandler(webapp2.RequestHandler):
-    def get(self):
-        template = jinja_environment.get_template('templates/mainpage.html')
-        self.response.out.write(template.render())
-    def post(self):
-        frontpage_template = jinja_environment.frontpage_template('templates/frontpage.html')
-
 class FrontPage(webapp2.RequestHandler):
     def get(self):
+
+        user=users.get_current_user()
+        if user:
+            self.response.write(user)
+            user=User(key=user.user_id())
+            user.put()
+        else:
+            self.redirect(users.create_login_url(self.request.url))
+
         template = jinja_environment.get_template('templates/frontpage.html')
         self.response.out.write(template.render())
+
+
     def post(self):
         game_template = jinja_environment.game_template('templates/startGame.html')
 
@@ -98,19 +105,18 @@ class ScienceHandler(webapp2.RequestHandler):
         template = jinja_environment.get_template('templates/science.html')
         self.response.out.write(template.render())
 
-        self.response.write(user1.name + " level" + str(user1.level))
 
 class SocialStudiesHandler(webapp2.RequestHandler):
     def get(self):
         template = jinja_environment.get_template('templates/ss.html')
         self.response.out.write(template.render())
-        self.response.write(u
+
 
 class MathHandler(webapp2.RequestHandler):
     def get(self):
         template = jinja_environment.get_template('templates/math.html')
         self.response.out.write(template.render())
-        self.response.write(user1.name + " level" + str(user1.level))
+
 
 
 
@@ -121,8 +127,7 @@ class MathHandler(webapp2.RequestHandler):
 
 
 app = webapp2.WSGIApplication([
-    ('/', MainHandler),
-    ('/frontPage', FrontPage),
+    ('/', FrontPage),
     ('/startGame', GameHandler),
     ('/addQ', AddQHandler),
     ('/instructions', InstructionsHandler),
