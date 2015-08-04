@@ -31,13 +31,12 @@ class User(ndb.Model):
     level= ndb.IntegerProperty()
     points = ndb.IntegerProperty()
     email_address = ndb.StringProperty()
-    key=ndb.StringProperty(required=True)
-
-
+    useridentification=ndb.StringProperty()
 
 
 class Question(ndb.Model):
     act_question= ndb.StringProperty(required=True)
+    q_id= ndb.IntegerProperty()
     category= ndb.StringProperty(required= True)
     level = ndb.IntegerProperty(required = True)
     type_question= ndb.StringProperty()
@@ -60,20 +59,42 @@ question5=Question(act_question= "What is the main element in Earth's atmosphere
 question5.put()
 
 
+class SettingsHandler(webapp2.RequestHandler):
+    def get(self):
+
+        template = jinja_environment.get_template('templates/frontpage.html')
+        self.response.out.write(template.render())
+
+    def post(self):
+        x=self.request.get('name')
+        user1=User(name=x, level=1, points=0)
+        user1.put()
+        # level_html=User.query(user_id).fetch()
+
+
+        getname={'user_name' : x}
+        template = jinja_environment.get_template('templates/frontpage.html')
+        self.response.out.write(template.render(getname))
+
 
 class FrontPage(webapp2.RequestHandler):
     def get(self):
 
-        user=users.get_current_user()
-        if user:
-            self.response.write(user)
-            user=User(key=user.user_id())
-            user.put()
+        user_api_user=users.get_current_user()
+        if user_api_user:
+            query_results = User.query(User.useridentification == user_api_user.user_id()).fetch()
+
+            if query_results:
+                template = jinja_environment.get_template('templates/frontpage.html')
+                self.response.out.write(template.render())
+
+            else:
+                user_from_model=User(useridentification=user_api_user.user_id())
+                user_from_model.put()
+                template = jinja_environment.get_template('templates/settings.html')
+                self.response.out.write(template.render())
         else:
             self.redirect(users.create_login_url(self.request.url))
-
-        template = jinja_environment.get_template('templates/frontpage.html')
-        self.response.out.write(template.render())
 
 
     def post(self):
@@ -126,12 +147,17 @@ class MathHandler(webapp2.RequestHandler):
 
 
 
+
+
+
 app = webapp2.WSGIApplication([
     ('/', FrontPage),
+    ('/frontpage', SettingsHandler),
     ('/startGame', GameHandler),
     ('/addQ', AddQHandler),
     ('/instructions', InstructionsHandler),
     ('/science', ScienceHandler),
     ('/ss', SocialStudiesHandler),
-    ('/math', MathHandler)
+    ('/math', MathHandler),
+    ('/settings', SettingsHandler)
 ], debug=True)
