@@ -31,7 +31,7 @@ class User(ndb.Model):
     password= ndb.StringProperty(required =True)
     points = ndb.IntegerProperty()
 
-user1= User(email="dt4@gmail.com", name="DT4", level=7, password="dt4cssi", points=342)
+user1= User(email="dt4@gmail.com", name="DT4", level=1, password="dt4cssi", points=342)
 user1.put()
 class Question(ndb.Model):
     act_question= ndb.StringProperty(required=True)
@@ -42,10 +42,19 @@ class Question(ndb.Model):
     answer= ndb.StringProperty()
 
 question1=Question(act_question= "How many moons does earth have?", category="Science", level= 1, answer="1")
+question1.put()
+
 question2=Question(act_question= "If the number of protons in an element is seven, how many electrons does it have", category="Science", level= 3, answer="seven")
+question2.put()
+
 question3=Question(act_question= "How many planets are there?", category="Science", level= 2, answer="Eight")
+question3.put()
+
 question4=Question(act_question= "How many moons does Saturn have?", category="Science", level= 4, answer="Sixty Two")
+question4.put()
+
 question5=Question(act_question= "What is the main element in Earth's atmosphere", category="Oxygen", level= 2, answer="1")
+question5.put()
 
 
 
@@ -88,13 +97,14 @@ class ScienceHandler(webapp2.RequestHandler):
     def get(self):
         template = jinja_environment.get_template('templates/science.html')
         self.response.out.write(template.render())
+
         self.response.write(user1.name + " level" + str(user1.level))
 
 class SocialStudiesHandler(webapp2.RequestHandler):
     def get(self):
         template = jinja_environment.get_template('templates/ss.html')
         self.response.out.write(template.render())
-        self.response.write(user1.name + " level" + str(user1.level))
+        self.response.write(u
 
 class MathHandler(webapp2.RequestHandler):
     def get(self):
