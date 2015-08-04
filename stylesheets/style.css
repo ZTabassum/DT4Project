@@ -8,10 +8,36 @@ body{
 
 }
 #Title_Request{
-  color: rgb(73, 252, 44);
+  color: rgb(245, 39, 243);
+  font-size: 150%;
 }
 
 #Home_Page_Title{
   text-align: center;
-  color: rgb(73, 252, 44);
+  color: rgb(245, 39, 243);
+}
+
+#Login_block{
+  position: absolute;
+  bottom: 135px;
+  right: 125px;
+  padding-left: 20px;
+  padding-right: 20px;
+  padding-bottom: 20px;
+  padding-top: 20px;
+}
+#Sign_In_Button{
+  color: blue;
+}
+#User_Email_Input{
+  color: rgb(245, 39, 243);
+  font-size: 140%;
+}
+#User_Name_Input{
+  color: rgb(245, 39, 243);
+  font-size: 140%;
+}
+#User_Password_Input{
+  color: rgb(245, 39, 243);
+  font-size: 140%;
 }
