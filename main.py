@@ -15,6 +15,8 @@
 # limitations under the License.
 #
 from google.appengine.ext import ndb
+from google.appengine.api import users
+import random
 import webapp2
 import jinja2
 import os
@@ -25,50 +27,63 @@ jinja_environment= jinja2.Environment(
   autoescape=True)
 
 class User(ndb.Model):
-    email = ndb.StringProperty(required= True)
-    name= ndb.StringProperty(required= True)
-    level= ndb.IntegerProperty(required = True)
-    password= ndb.StringProperty(required =True)
+    currentUser = ndb.StringProperty(required = True)  # OR not required, or repeated, depends on your app.
+    level= ndb.IntegerProperty()
     points = ndb.IntegerProperty()
 
-user1= User(email="dt4@gmail.com", name="DT4", level=1, password="dt4cssi", points=342)
-user1.put()
+class MainHandler(webapp2.RequestHandler):
+    def get(self):
+        template = jinja_environment.get_template('templates/mainpage.html')
+        self.response.out.write(template.render())
+
+        user = users.get_current_user()
+        if user:
+            # If there was a user logged in, do stuff.
+            self.response.write(user)
+            user = User(currentUser = user.user_id())
+            user.put()
+        else:
+            # Send the user to a login page, then come back to this request, this
+            # time a user will be present.
+            self.redirect(users.create_login_url(self.request.uri))
+
+    def post(self):
+        frontpage_template = jinja_environment.frontpage_template('templates/frontpage.html')
+
 class Question(ndb.Model):
     act_question= ndb.StringProperty(required=True)
+    q_id= ndb.IntegerProperty()
     category= ndb.StringProperty(required= True)
     level = ndb.IntegerProperty(required = True)
     type_question= ndb.StringProperty()
     point_level = ndb.IntegerProperty()
     answer= ndb.StringProperty()
 
-question1=Question(act_question= "How many moons does earth have?", category="Science", level= 1, answer="1")
+question1=Question(act_question= "How many moons does earth have?", category="Science", level= 1, answer="1", q_id= 1)
 question1.put()
 
-question2=Question(act_question= "If the number of protons in an element is seven, how many electrons does it have", category="Science", level= 3, answer="seven")
+question2=Question(act_question= "If the number of protons in an element is seven, how many electrons does it have", category="Science", level= 3, answer="seven", q_id= 2)
 question2.put()
 
-question3=Question(act_question= "How many planets are there?", category="Science", level= 2, answer="Eight")
+question3=Question(act_question= "How many planets are there?", category="Science", level= 2, answer="Eight", q_id= 3)
 question3.put()
 
-question4=Question(act_question= "How many moons does Saturn have?", category="Science", level= 4, answer="Sixty Two")
+question4=Question(act_question= "How many moons does Saturn have?", category="Science", level= 4, answer="Sixty Two",q_id= 4)
 question4.put()
 
-question5=Question(act_question= "What is the main element in Earth's atmosphere", category="Oxygen", level= 2, answer="1")
+question5=Question(act_question= "What is the main element in Earth's atmosphere", category="Science", level= 2, answer="Oxygen",q_id= 5)
 question5.put()
 
+question_num= random.randint(1,4)
+question_qry= Question.query(Question.q_id == question_num).fetch()
+question_answer= Question.query(Question.q_id == question_num).fetch()
 
-
-class MainHandler(webapp2.RequestHandler):
-    def get(self):
-        template = jinja_environment.get_template('templates/mainpage.html')
-        self.response.out.write(template.render())
-    def post(self):
-        frontpage_template = jinja_environment.frontpage_template('templates/frontpage.html')
 
 class FrontPage(webapp2.RequestHandler):
     def get(self):
         template = jinja_environment.get_template('templates/frontpage.html')
         self.response.out.write(template.render())
+        self.response.write(question_qry.answer)
     def post(self):
         game_template = jinja_environment.game_template('templates/startGame.html')
 
@@ -100,12 +115,22 @@ class ScienceHandler(webapp2.RequestHandler):
 
         self.response.write(user1.name + " level" + str(user1.level))
 
+        self.response.write(question_qry.act_question)
+        self.response.write(question_qry.answer)
+#Pseudo Logic for Answers
+        # if question_answer == question_qry.answer:
+        #     user level= user level +1
+        #     points= points + questions.points
+        #     self.response.write(question.answer)
+        # elif answer != question_qry.answer:
+        #     print "Incorrect"
+        #     self.response.write(question.answer)
+        #     self.response.write(link)
+
 class SocialStudiesHandler(webapp2.RequestHandler):
     def get(self):
         template = jinja_environment.get_template('templates/ss.html')
         self.response.out.write(template.render())
-        self.response.write(u
-
 class MathHandler(webapp2.RequestHandler):
     def get(self):
         template = jinja_environment.get_template('templates/math.html')
