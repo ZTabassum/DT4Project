@@ -55,7 +55,7 @@ question3.put()
 question4=Question(act_question= "How many moons does Saturn have?", category="Science", level= 4, answer="Sixty Two")
 question4.put()
 
-question5=Question(act_question= "What is the main element in Earth's atmosphere", category="Oxygen", level= 2, answer="1")
+question5=Question(act_question= "What is the main element in Earth's atmosphere", category="Science", level= 2, answer="1")
 question5.put()
 
 
@@ -125,6 +125,15 @@ class ScienceHandler(webapp2.RequestHandler):
     def get(self):
         template = jinja_environment.get_template('templates/science.html')
         self.response.out.write(template.render())
+
+        if question_answer == question_qry.answer:
+            user level= user level +1
+            points= points + questions.points
+            self.response.write(question.answer)
+        elif answer != question_qry.answer:
+            print "Incorrect"
+            self.response.write(question.answer)
+            self.response.write(link)
 
 
 class SocialStudiesHandler(webapp2.RequestHandler):
