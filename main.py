@@ -16,7 +16,11 @@
 #
 from google.appengine.ext import ndb
 from google.appengine.api import users
+<<<<<<< HEAD
 import random
+=======
+import json
+>>>>>>> 7aeca2cdb21c05c60cdcf2f1c5634e18abc963e0
 import webapp2
 import jinja2
 import os
@@ -27,10 +31,18 @@ jinja_environment= jinja2.Environment(
   autoescape=True)
 
 class User(ndb.Model):
+<<<<<<< HEAD
     currentUser = ndb.StringProperty(required = True)  # OR not required, or repeated, depends on your app.
+=======
+    name= ndb.StringProperty()
+>>>>>>> 7aeca2cdb21c05c60cdcf2f1c5634e18abc963e0
     level= ndb.IntegerProperty()
     points = ndb.IntegerProperty()
+    email_address = ndb.StringProperty()
+    useridentification=ndb.StringProperty()
 
+
+<<<<<<< HEAD
 class MainHandler(webapp2.RequestHandler):
     def get(self):
         template = jinja_environment.get_template('templates/mainpage.html')
@@ -50,6 +62,8 @@ class MainHandler(webapp2.RequestHandler):
     def post(self):
         frontpage_template = jinja_environment.frontpage_template('templates/frontpage.html')
 
+=======
+>>>>>>> 7aeca2cdb21c05c60cdcf2f1c5634e18abc963e0
 class Question(ndb.Model):
     act_question= ndb.StringProperty(required=True)
     q_id= ndb.IntegerProperty()
@@ -78,12 +92,53 @@ question_num= random.randint(1,4)
 question_qry= Question.query(Question.q_id == question_num).fetch()
 question_answer= Question.query(Question.q_id == question_num).fetch()
 
+<<<<<<< HEAD
 
 class FrontPage(webapp2.RequestHandler):
     def get(self):
         template = jinja_environment.get_template('templates/frontpage.html')
         self.response.out.write(template.render())
         self.response.write(question_qry.answer)
+=======
+class SettingsHandler(webapp2.RequestHandler):
+    def get(self):
+
+        template = jinja_environment.get_template('templates/frontpage.html')
+        self.response.out.write(template.render())
+
+    def post(self):
+        x=self.request.get('name')
+        user1=User(name=x, level=1, points=0)
+        user1.put()
+        # level_html=User.query(user_id).fetch()
+
+
+        getname={'user_name' : x}
+        template = jinja_environment.get_template('templates/frontpage.html')
+        self.response.out.write(template.render(getname))
+
+
+class FrontPage(webapp2.RequestHandler):
+    def get(self):
+
+        user_api_user=users.get_current_user()
+        if user_api_user:
+            query_results = User.query(User.useridentification == user_api_user.user_id()).fetch()
+
+            if query_results:
+                template = jinja_environment.get_template('templates/frontpage.html')
+                self.response.out.write(template.render())
+
+            else:
+                user_from_model=User(useridentification=user_api_user.user_id())
+                user_from_model.put()
+                template = jinja_environment.get_template('templates/settings.html')
+                self.response.out.write(template.render())
+        else:
+            self.redirect(users.create_login_url(self.request.url))
+
+
+>>>>>>> 7aeca2cdb21c05c60cdcf2f1c5634e18abc963e0
     def post(self):
         game_template = jinja_environment.game_template('templates/startGame.html')
 
@@ -113,7 +168,6 @@ class ScienceHandler(webapp2.RequestHandler):
         template = jinja_environment.get_template('templates/science.html')
         self.response.out.write(template.render())
 
-        self.response.write(user1.name + " level" + str(user1.level))
 
         self.response.write(question_qry.act_question)
         self.response.write(question_qry.answer)
@@ -131,11 +185,19 @@ class SocialStudiesHandler(webapp2.RequestHandler):
     def get(self):
         template = jinja_environment.get_template('templates/ss.html')
         self.response.out.write(template.render())
+<<<<<<< HEAD
+=======
+
+
+>>>>>>> 7aeca2cdb21c05c60cdcf2f1c5634e18abc963e0
 class MathHandler(webapp2.RequestHandler):
     def get(self):
         template = jinja_environment.get_template('templates/math.html')
         self.response.out.write(template.render())
-        self.response.write(user1.name + " level" + str(user1.level))
+
+
+
+
 
 
 
@@ -146,12 +208,13 @@ class MathHandler(webapp2.RequestHandler):
 
 
 app = webapp2.WSGIApplication([
-    ('/', MainHandler),
-    ('/frontPage', FrontPage),
+    ('/', FrontPage),
+    ('/frontpage', SettingsHandler),
     ('/startGame', GameHandler),
     ('/addQ', AddQHandler),
     ('/instructions', InstructionsHandler),
     ('/science', ScienceHandler),
     ('/ss', SocialStudiesHandler),
-    ('/math', MathHandler)
+    ('/math', MathHandler),
+    ('/settings', SettingsHandler)
 ], debug=True)

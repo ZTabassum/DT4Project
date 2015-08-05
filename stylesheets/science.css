@@ -1,0 +1,44 @@
+body{
+  background: url("https://s-media-cache-ak0.pinimg.com/originals/12/22/c8/1222c88775290de26810c49a4f4f048e.jpg");
+  z-index: 0;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+}
+
+#Question{
+  position: absolute;
+  left: 160px;
+  bottom: 120px;
+}
+#User_Heading{
+  font-size: 100%;
+  position: absolute;
+  left: 150px;
+  bottom: 500px;
+  color: rgb(29, 207, 200);
+}
+#Science_Title{
+  font-size: 150%;
+  text-align: center;
+  color: rgb(29, 207, 200);
+}
+#Proceed_Button{
+  position: absolute;
+  left: 455px;
+  bottom: 150px;
+}
+#User_Answer_Request{
+  font-size: 130%;
+}
+#GAME{
+  position: absolute;
+  left: 190px;
+  bottom: 290px;
+  color: rgb(29, 207, 200);
+  padding-left: 50px;
+  padding-right: 50px;
+  padding-top: 50px;
+  padding-bottom: 50px;
+}

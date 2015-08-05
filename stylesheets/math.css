@@ -1,0 +1,38 @@
+body{
+  background: url("http://orig03.deviantart.net/672b/f/2010/217/7/4/the_fall_of_math_by_zy0rg.png");
+  z-index: 0;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+}
+
+
+#User_Heading{
+  font-size: 100%;
+  position: absolute;
+  left: 150px;
+  bottom: 500px;
+  color: rgb(255, 255, 255);
+}
+#Math_Title{
+  font-size: 150%;
+  text-align: center;
+  color: rgb(255, 255, 255);
+}
+#Proceed_Button{
+  position: absolute;
+  left: 455px;
+  bottom: 150px;
+}
+#GAME{
+  font-size: 100%;
+  position: absolute;
+  left: 300px;
+  bottom: 290px;
+  color: rgb(255,255,255);
+  padding-left: 20px;
+  padding-right: 20px;
+  padding-top: 20px;
+  padding-bottom: 20px;
+}
