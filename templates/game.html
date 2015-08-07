@@ -1,24 +1,71 @@
 <!DOCTYPE html>
 <html>
-  <head>
-  </head>
-  <body>
-    <h1><center>CATEGORIES</center></h1>
+<head>
 
-    <form action= "/science" method= "get">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+  <link type= "text/css" rel="stylesheet" href="stylesheets/game.css" />
+  <script href="scripts/grayscale.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+</head>
+<body id="page-top" data-spy="scroll" data-target=".navbar-fixed-top">
+  <nav class="navbar navbar-custom navbar-fixed-top" role="navigation">
+      <div class="container">
+          <div class="navbar-header">
+              <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-main-collapse">
+                  <i class="fa fa-bars"></i>
+              </button>
+              <a class="navbar-brand page-scroll" href="http://www.triviacrack.com/" id= "title">
+                  <span class="light">TRIVIA</span> GAME
+              </a>
+          </div>
+  <div class="collapse navbar-collapse navbar-right navbar-main-collapse">
+      <ul class="nav navbar-nav">
+          <!-- Hidden li included to remove active class from about link when scrolled up past about section -->
+          <li class="hidden">
+              <a href="#page-top"></a>
+          </li>
+          <li>
+              <a href="/startGame">Start Game</a>
+          </li>
+          <li>
+              <a href="/settings">Home</a>
+          </li>
+          <li>
+              <a href="/addQ">Add Questions</a>
+          </li>
+      </ul>
+  </div>
+</div>
+</nav>
 
-      <center><p> <input type="submit" value= "Science" name="category1"/></p></center>
-    </form>
+<header class="intro">
+    <div class="intro-body">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-8 col-md-offset-2">
+                    <h1 class="brand-heading" id="Home_Page_Title">Categories</h1>
 
-    <form action= "/math" method= "get">
+                            <form action= "/science" method= "get">
 
-      <center><p> <input type="submit" value= "Math" name="AddQuestions"/></p></center>
-    </form>
+                             <input type="submit" class= btn-circle  value= "Science" name="category1"/>
+                            </form>
 
-    <form action= "/ss" method= "get">
 
-      <center><p> <input type="submit" value= "Social Studies" name="SocialStudies"/></p></center>
-    </form>
+                            <form action= "/math" method= "get">
 
-  </body>
-  </html>
+                              <input type="submit" class= btn-circle  value= "Math" name="AddQuestions"/>
+                            </form>
+
+                            <form action= "/ss" method= "get">
+
+                            <input type="submit" class= btn-circle value= "Social Studies" name="SocialStudies"/>
+                            </form>
+
+                      </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+<audio controls autoplay loop src="music/pacman.mp3">
+</audio>

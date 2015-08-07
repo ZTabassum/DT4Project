@@ -10,6 +10,12 @@ handlers:
   upload: favicon\.ico
 - url: /stylesheets
   static_dir: stylesheets
+- url: /scripts
+  static_dir: scripts
+- url: /music
+  static_dir: music
+- url: /backgrounds
+  static_dir: backgrounds
 
 
 - url: .*
