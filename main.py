@@ -226,9 +226,19 @@ class ScienceHandler(webapp2.RequestHandler):
         randnum = random.randint(0,len(questions)-1)
         logging.info("YOU HAVE THIS MANY QUESTIONS" + str(len(questions)))
 
+        if len(questionindex) == len(questions):
+                template = jinja_environment.get_template('templates/done.html')
+                self.response.out.write(template.render())
+
+
+
+
+        while randnum in questionindex:
+            randnum =random.randint(0,len(questions)-1)
+
 
         if randnum not in questionindex:
-            # questionindex.append(randnum)
+            questionindex.append(randnum)
 
             userq = questions[randnum].act_question
             questionid=questions[randnum].q_id
@@ -242,6 +252,10 @@ class ScienceHandler(webapp2.RequestHandler):
 
             template = jinja_environment.get_template('templates/science.html')
             self.response.out.write(template.render(template_vars))
+
+
+
+
 
 
 
@@ -291,8 +305,20 @@ class SocialStudiesHandler(webapp2.RequestHandler):
         questions=Question.query().filter(Question.category==str('Social Studies')).fetch()
         randnum = random.randint(0,len(questions)-1)
         logging.info("YOU HAVE THIS MANY QUESTIONS" + str(len(questions)))
+        if len(questionindex) == len(questions):
+                template = jinja_environment.get_template('templates/done.html')
+                self.response.out.write(template.render())
+
+
+
+
+        while randnum in questionindex:
+            randnum =random.randint(0,len(questions)-1)
+
+
         if randnum not in questionindex:
-        # questionindex.append(randnum)
+            questionindex.append(randnum)
+
             userq = questions[randnum].act_question
             questionid=questions[randnum].q_id
 
@@ -302,8 +328,13 @@ class SocialStudiesHandler(webapp2.RequestHandler):
             'user_question': userq,
             'question_id' : questionid, 'userlevel': query_results[0].level, 'username' : query_results[0].name, 'userpoints' : query_results[0].points, 'randnum' : randnum
                 }
-            template = jinja_environment.get_template('templates/ss.html')
+
+            template = jinja_environment.get_template('templates/science.html')
             self.response.out.write(template.render(template_vars))
+
+
+
+
 
     def post (self):
 
@@ -350,8 +381,20 @@ class MathHandler(webapp2.RequestHandler):
         questions=Question.query().filter(Question.category==str('Math')).fetch()
         randnum = random.randint(0,len(questions)-1)
         logging.info("YOU HAVE THIS MANY QUESTIONS" + str(len(questions)))
+        if len(questionindex) == len(questions):
+                template = jinja_environment.get_template('templates/done.html')
+                self.response.out.write(template.render())
+
+
+
+
+        while randnum in questionindex:
+            randnum =random.randint(0,len(questions)-1)
+
+
         if randnum not in questionindex:
-            # questionindex.append(randnum)
+            questionindex.append(randnum)
+
             userq = questions[randnum].act_question
             questionid=questions[randnum].q_id
 
@@ -362,8 +405,12 @@ class MathHandler(webapp2.RequestHandler):
             'question_id' : questionid, 'userlevel': query_results[0].level, 'username' : query_results[0].name, 'userpoints' : query_results[0].points, 'randnum' : randnum
                 }
 
-            template = jinja_environment.get_template('templates/ss.html')
+            template = jinja_environment.get_template('templates/science.html')
             self.response.out.write(template.render(template_vars))
+
+
+
+
 
 
 
