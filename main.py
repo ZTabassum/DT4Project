@@ -405,7 +405,10 @@ class MathHandler(webapp2.RequestHandler):
         else:
             self.response.write('Error! You need to type something in')
 
-
+class AboutHandler(webapp2.RequestHandler):
+    def get(self):
+        template = jinja_environment.get_template('templates/about.html')
+        self.response.out.write(template.render())
 
 
 
@@ -417,6 +420,7 @@ class MathHandler(webapp2.RequestHandler):
 
 app = webapp2.WSGIApplication([
     ('/', FrontPage),
+    ('/about',AboutHandler),
     ('/frontpage', SettingsHandler),
     ('/startGame', GameHandler),
     ('/addQ', AddQHandler),

@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<!-- saved from url=(0031)http://localhost:8080/startGame -->
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+  <link type="text/css" rel="stylesheet" href="./startGame_files/game.css">
+  <script href="scripts/grayscale.js"></script>
+  <script src="./startGame_files/jquery.min.js"></script>
+<style id="style-1-cropbar-clipper">/* Copyright 2014 Evernote Corporation. All rights reserved. */
+.en-markup-crop-options {
+    top: 18px !important;
+    left: 50% !important;
+    margin-left: -100px !important;
+    width: 200px !important;
+    border: 2px rgba(255,255,255,.38) solid !important;
+    border-radius: 4px !important;
+}
+
+.en-markup-crop-options div div:first-of-type {
+    margin-left: 0px !important;
+}
+</style></head>
+<body id="page-top" data-spy="scroll" data-target=".navbar-fixed-top">
+  <nav class="navbar navbar-custom navbar-fixed-top" role="navigation">
+      <div class="container">
+          <div class="navbar-header">
+              <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-main-collapse">
+                  <i class="fa fa-bars"></i>
+              </button>
+              <a class="navbar-brand page-scroll" href="http://www.triviacrack.com/" id="title">
+                  <span class="light">TRIVIA</span> GAME
+              </a>
+          </div>
+  <div class="collapse navbar-collapse navbar-right navbar-main-collapse">
+      <ul class="nav navbar-nav">
+          <!-- Hidden li included to remove active class from about link when scrolled up past about section -->
+          <li class="hidden">
+              <a href="http://localhost:8080/startGame#page-top"></a>
+          </li>
+          <li>
+              <a href="./startGame_files/startGame.html">Start Game</a>
+          </li>
+          <li>
+              <a href="http://localhost:8080/settings">Home</a>
+          </li>
+          <li>
+              <a href="http://localhost:8080/addQ">Add Questions</a>
+          </li>
+
+          <li>
+              <a href="http://localhost:8080/stats"> Your Stats</a>
+          </li>
+      </ul>
+  </div>
+</div>
+</nav>
+
+<header class="intro">
+    <div class="intro-body">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-8 col-md-offset-2">
+                    <h1 class="brand-heading" id="Home_Page_Title">Categories</h1>
+
+                            <form action="http://localhost:8080/science" method="get">
+
+                             <input type="submit" class="btn-circle" value="Science" name="category1">
+                            </form>
+
+
+                            <form action="http://localhost:8080/math" method="get">
+
+                              <input type="submit" class="btn-circle" value="Math" name="AddQuestions">
+                            </form>
+
+                            <form action="http://localhost:8080/ss" method="get">
+
+                            <input type="submit" class="btn-circle" value="Social Studies" name="SocialStudies">
+                            </form>
+
+                      </div>
+                </div>
+            </div>
+        </div>
+    
+</header>
+<audio controls="" autoplay="" loop="" src="music/pacman.mp3">
+</audio></body></html>

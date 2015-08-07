@@ -2,38 +2,83 @@
 <html>
 
 <head>
-  <h1> Add Questions and Answers </h1>
-
+  <link type= "text/css" rel="stylesheet" href="stylesheets/science.css" />
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+  <script src="scripts/math.js"></script>
+  <title>Add Question </title>
 <head>
+<body id="page-top" data-spy="scroll" data-target=".navbar-fixed-top">
+    <nav class="navbar navbar-custom navbar-fixed-top" role="navigation">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-main-collapse">
+                    <i class="fa fa-bars"></i>
+                </button>
+                <a class="navbar-brand page-scroll" href="http://www.triviacrack.com/" id="title">
+                    <span class="light">TRIVIA</span> GAME
+                </a>
+            </div>
+    <div class="collapse navbar-collapse navbar-right navbar-main-collapse">
+        <ul class="nav navbar-nav">
+            <!-- Hidden li included to remove active class from about link when scrolled up past about section -->
+            <li class="hidden">
+                <a href="#page-top"></a>
+            </li>
+            <li>
+                <a href="/startGame">Categories</a>
+            </li>
+            <li>
+                <a href="/settings">Home</a>
+            </li>
+            <li>
+                <a href="/addQ">Add Questions</a>
+            </li>
+            <li>
+                <a href="/stats"> Your Stats</a>
+            </li>
+        </ul>
+    </div>
+  </div>
+  </nav>
 
-<body>
-  <form method="post" action ="/addQ">
-        <p> Enter your Question:  <input type="text" name="Question"/></p>
-        <!-- <p><input type="submit" value="Submit Question!" id="submitQuestion"></p> -->
+  <header class="intro">
+      <div class="intro-body">
+          <div class="container">
+              <div class="row">
+                  <div class="col-md-8 col-md-offset-2">
+                    <h1> Add questions </h1>
+                    <br>
+                      <form method="post" action ="/addQ">
+                            <p> Enter your Question:  <input type="text" name="Question"/></p>
+                            <!-- <p><input type="submit" value="Submit Question!" id="submitQuestion"></p> -->
 
-        <p> Enter your Level:  <input type="text" name="Level"/></p>
-        <!-- <p><input type="submit" value="Submit Level!" id="submitLevel"></p> -->
-
-
-        <p> Enter your Category:  <input type="text" name="Category"/></p>
-        <!-- <p><input type="submit" value="Submit Category!" id="submitCategory"></p> -->
-
-        <p> Enter your Answer:  <input type="text" name="Answer"/></p>
-        <!-- <p><input type="submit" value="Answer!" id="answer"></p> -->
-
-        <p> Enter your Explanation (optional):  <input type="text" name="Explanation"/></p>
-        <!-- <p><input type="submit" value="Answer!" id="answer"></p> -->
-
-        <p><input type="submit" value="Submit!" id="Submit All"> <p>
+                            <p> Enter your Level:  <input type="text" name="Level"/></p>
+                            <!-- <p><input type="submit" value="Submit Level!" id="submitLevel"></p> -->
 
 
+                            <p> Enter your Category:  <input type="text" name="Category"/></p>
+                            <!-- <p><input type="submit" value="Submit Category!" id="submitCategory"></p> -->
+
+                            <p> Enter your Answer:  <input type="text" name="Answer"/></p>
+                            <!-- <p><input type="submit" value="Answer!" id="answer"></p> -->
+
+                            <p> Enter your Explanation (optional):  <input type="text" name="Explanation"/></p>
+                            <!-- <p><input type="submit" value="Answer!" id="answer"></p> -->
+
+                            <p><input type="submit" value="Submit!" id="Submit All"> <p>
+
+
+                    </form>
+                  </div>
+              </div>
+          </div>
+      </div>
+  </header>
 
 
 
-
-
-
-</form>
+</body>
 
 
 
