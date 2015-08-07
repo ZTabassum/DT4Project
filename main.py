@@ -16,6 +16,7 @@
 #
 from google.appengine.ext import ndb
 from google.appengine.api import users
+
 import random
 import json
 import webapp2
@@ -51,6 +52,29 @@ class Question(ndb.Model):
 
 class FrontPage(webapp2.RequestHandler):
     def get(self):
+        template = jinja_environment.get_template('templates/frontpage.html')
+        self.response.out.write(template.render())
+        self.response.write(question_qry.answer)
+
+class SettingsHandler(webapp2.RequestHandler):
+    def get(self):
+
+        template = jinja_environment.get_template('templates/frontpage.html')
+        self.response.out.write(template.render())
+
+    def post(self):
+        x=self.request.get('name')
+        user1=User(name=x, level=1, points=0)
+        user1.put()
+        # level_html=User.query(user_id).fetch()
+
+
+        getname={'user_name' : x}
+        template = jinja_environment.get_template('templates/frontpage.html')
+        self.response.out.write(template.render(getname))
+
+class FrontPage(webapp2.RequestHandler):
+    def get(self):
 
         user_api_user=users.get_current_user()
         if user_api_user:
@@ -65,7 +89,6 @@ class FrontPage(webapp2.RequestHandler):
                 self.response.out.write(template.render())
         else:
             self.redirect(users.create_login_url(self.request.url))
-
 
 
     def post(self):
@@ -248,7 +271,6 @@ class ScienceHandler(webapp2.RequestHandler):
 
 
 
-
         elif user_answers.lower().strip()!= answer:
             self.response.write('Wrong, it was ' + answer + '. ' + explain)
             if query_results[0].points == 0:
@@ -280,12 +302,8 @@ class SocialStudiesHandler(webapp2.RequestHandler):
             'user_question': userq,
             'question_id' : questionid, 'userlevel': query_results[0].level, 'username' : query_results[0].name, 'userpoints' : query_results[0].points, 'randnum' : randnum
                 }
-
             template = jinja_environment.get_template('templates/ss.html')
             self.response.out.write(template.render(template_vars))
-
-
-
 
     def post (self):
 
@@ -326,6 +344,7 @@ class SocialStudiesHandler(webapp2.RequestHandler):
 
 
 questionindex=[]
+
 class MathHandler(webapp2.RequestHandler):
     def get(self):
         questions=Question.query().filter(Question.category==str('Math')).fetch()
