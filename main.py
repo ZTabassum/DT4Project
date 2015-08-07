@@ -50,28 +50,6 @@ class Question(ndb.Model):
     explain = ndb. StringProperty()
 
 
-class FrontPage(webapp2.RequestHandler):
-    def get(self):
-        template = jinja_environment.get_template('templates/frontpage.html')
-        self.response.out.write(template.render())
-        self.response.write(question_qry.answer)
-
-class SettingsHandler(webapp2.RequestHandler):
-    def get(self):
-
-        template = jinja_environment.get_template('templates/frontpage.html')
-        self.response.out.write(template.render())
-
-    def post(self):
-        x=self.request.get('name')
-        user1=User(name=x, level=1, points=0)
-        user1.put()
-        # level_html=User.query(user_id).fetch()
-
-
-        getname={'user_name' : x}
-        template = jinja_environment.get_template('templates/frontpage.html')
-        self.response.out.write(template.render(getname))
 
 class FrontPage(webapp2.RequestHandler):
     def get(self):
@@ -329,7 +307,7 @@ class SocialStudiesHandler(webapp2.RequestHandler):
             'question_id' : questionid, 'userlevel': query_results[0].level, 'username' : query_results[0].name, 'userpoints' : query_results[0].points, 'randnum' : randnum
                 }
 
-            template = jinja_environment.get_template('templates/science.html')
+            template = jinja_environment.get_template('templates/ss.html')
             self.response.out.write(template.render(template_vars))
 
 
@@ -405,7 +383,7 @@ class MathHandler(webapp2.RequestHandler):
             'question_id' : questionid, 'userlevel': query_results[0].level, 'username' : query_results[0].name, 'userpoints' : query_results[0].points, 'randnum' : randnum
                 }
 
-            template = jinja_environment.get_template('templates/science.html')
+            template = jinja_environment.get_template('templates/math.html')
             self.response.out.write(template.render(template_vars))
 
 
